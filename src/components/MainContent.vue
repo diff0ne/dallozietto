@@ -4,16 +4,29 @@
       <img class="propic" src="@/assets/propic.png" alt="Propic" />
     </div>
     <div class="introduction">
-      <h2 class="display-2 text-center bilbo-regular">Mi presento</h2>
+      <div class="divider"></div>
+      <!-- Add a divider element here -->
+
+      <h2 class="display-2 text-center bilbo-regular">La mia casa</h2>
       <p class="text-center w-auto">
-        Benvenuti a casa mia! Sono lo Zietto, un avvocato che ama la natura e ha
-        deciso di condividere questo angolo di pace con voi. Esplorate i nostri
-        spazi verdi, respirate aria fresca e lasciatevi coccolare dalla
-        tranquillità della campagna.
-        <br />Spero che il vostro soggiorno sia rigenerante e pieno di bellezza
-        naturale.
+        Benvenuti nella mia villa nel verde! Mi chiamano lo Zietto e sono un
+        appassionato della natura e della campagna. Qui, tra gli alberi e il
+        canto degli uccelli, ho creato un rifugio accogliente per chi cerca pace
+        e tranquillità.
+        <br />Siate i benvenuti a condividere con me questo angolo di paradiso.
       </p>
     </div>
+    <v-carousel cycle hide-delimiter-background class="small-carousel">
+      <v-carousel-item v-for="(image, index) in carouselImages" :key="index">
+        <div class="carousel-item">
+          <img :src="image" class="carousel-image" />
+        </div>
+      </v-carousel-item>
+    </v-carousel>
+    <div class="divider pt-15"></div>
+    <!-- Add a divider element here -->
+    <h2 class="display-2 text-center bilbo-regular">Le mie stanze</h2>
+
     <div class="featured-rooms">
       <v-container fluid>
         <v-row justify="center">
@@ -34,6 +47,7 @@
 
 <script>
 import RoomCard from "@/components/RoomCard.vue";
+
 export default {
   name: "MainContent",
   components: {
@@ -44,6 +58,11 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  data() {
+    return {
+      carouselImages: ["src/assets/overView/image2.jpg", "src/assets/overView/image3.jpg"],
+    };
   },
 };
 </script>
@@ -69,11 +88,31 @@ export default {
 }
 
 .introduction {
-  padding: 40px;
+  padding: 30px;
   text-align: center;
-  margin-bottom: 40px;
 }
 
-.featured-rooms {
+.small-carousel {
+  width: 90%; /* Adjust the width of the carousel */
+  margin: auto; /* Center the carousel horizontally */
+}
+
+.carousel-item {
+  display: flex; /* Use flexbox for vertical centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100%; /* Ensure the carousel item takes full height */
+}
+
+.carousel-image {
+  max-width: 100%; /* Set the width of carousel images to fit within the container */
+  max-height: 100%; /* Set the height of carousel images to fit within the container */
+}
+
+.divider {
+  width: 50%;
+  margin: auto;
+  border-bottom: 2px solid #182524; /* Add a decorative border */
+  margin-bottom: 20px; /* Add some spacing */
 }
 </style>
