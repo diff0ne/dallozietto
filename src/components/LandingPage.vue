@@ -2,7 +2,6 @@
   <v-app>
     <!-- Header Section -->
     <Header />
-
     <!-- Main Content Section -->
     <MainContent :featuredRooms="featuredRooms" />
 
@@ -12,19 +11,49 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue';
-import MainContent from '@/components/MainContent.vue';
-import Footer from '@/components/Footer.vue';
+import Header from "@/components/Header.vue";
+import MainContent from "@/components/MainContent.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
     Header,
     MainContent,
-    Footer
+    Footer,
   },
   data() {
     return {
       featuredRooms: [
+        {
+          name: "Luxury Suite",
+          location: "New York City",
+          image: "https://via.placeholder.com/400x250",
+        },
+        {
+          name: "Luxury Suite",
+          location: "New York City",
+          image: "https://via.placeholder.com/400x250",
+        },
+        {
+          name: "Luxury Suite",
+          location: "New York City",
+          image: "https://via.placeholder.com/400x250",
+        },
+        {
+          name: "Luxury Suite",
+          location: "New York City",
+          image: "https://via.placeholder.com/400x250",
+        },
+        {
+          name: "Luxury Suite",
+          location: "New York City",
+          image: "https://via.placeholder.com/400x250",
+        },
+        {
+          name: "Luxury Suite",
+          location: "New York City",
+          image: "https://via.placeholder.com/400x250",
+        },
         {
           name: "Luxury Suite",
           location: "New York City",
