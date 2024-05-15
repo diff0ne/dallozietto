@@ -14,5 +14,7 @@ declare module 'vue' {
     RoomCard: typeof import('./src/components/RoomCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Rules: typeof import('./src/components/Rules.vue')['default']
+    Services: typeof import('./src/components/Services.vue')['default']
   }
 }

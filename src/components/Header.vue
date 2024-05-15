@@ -9,7 +9,7 @@
         :elevation="elevation"
       >
         <v-toolbar-title class="font-title headline" @click="scrollTop">
-          Benvenuto!
+          Benvenuto da Amabel!
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="makePhoneCall">
@@ -121,6 +121,7 @@
     margin-left: 15px; /* Add margin to the left of the title */
     padding: 20px 15px; /* Added padding */
     line-height: 1; /* Ensure the line height is normal */
+    font-size: 30px;
   }
   </style>
   

@@ -6,14 +6,15 @@
     <div class="introduction">
       <div class="divider"></div>
       <!-- Add a divider element here -->
+      <h2 class="display-2 text-center bilbo-regular">La mia casa - Amabel</h2>
 
-      <h2 class="display-2 text-center bilbo-regular">La mia casa</h2>
       <p class="text-center w-auto">
-        Benvenuti nella mia villa nel verde! Mi chiamano lo Zietto e sono un
+        Benvenuti nella mia villa nel verde! Mi chiamano lo
+        <span style="font-style: italic; color: green">Zietto</span> e sono un
         appassionato della natura e della campagna. Qui, tra gli alberi e il
         canto degli uccelli, ho creato un rifugio accogliente per chi cerca pace
-        e tranquillità.
-        <br />Siate i benvenuti a condividere con me questo angolo di paradiso.
+        e tranquillità. Siate i benvenuti a condividere con me questo angolo di
+        paradiso.
       </p>
     </div>
     <v-carousel cycle hide-delimiter-background class="small-carousel">
@@ -23,25 +24,36 @@
         </div>
       </v-carousel-item>
     </v-carousel>
-    <div class="divider pt-15"></div>
+
     <!-- Add a divider element here -->
+    <div class="divider pt-10"></div>
     <h2 class="display-2 text-center bilbo-regular">Le mie stanze</h2>
 
     <div class="featured-rooms">
       <v-container fluid>
         <v-row justify="center">
           <v-col
-            cols="12"
-            sm="6"
-            md="4"
             v-for="(room, index) in featuredRooms"
             :key="index"
+            cols="12"
+            sm="6"
+            md="3"
           >
             <RoomCard :room="room" />
           </v-col>
         </v-row>
       </v-container>
     </div>
+
+    <!-- Add a divider element here -->
+    <div class="divider pt-10"></div>
+    <h2 class="display-2 text-center bilbo-regular">Servizi</h2>
+    <Services />
+
+    <!-- Add a divider element here -->
+    <div class="divider pt-10"></div>
+    <h2 class="display-2 text-center bilbo-regular">Regolamento</h2>
+    <Rules />
   </div>
 </template>
 
@@ -61,7 +73,14 @@ export default {
   },
   data() {
     return {
-      carouselImages: ["src/assets/overView/image2.jpg", "src/assets/overView/image3.jpg"],
+      carouselImages: [
+        "src/assets/overView/image1.jpeg",
+        "src/assets/overView/image2.jpeg",
+        "src/assets/overView/image3.jpeg",
+        "src/assets/overView/image4.jpeg",
+        "src/assets/overView/image5.jpeg",
+        "src/assets/overView/image6.jpeg",
+      ],
     };
   },
 };
@@ -73,17 +92,17 @@ export default {
 }
 
 .propic-container {
-  height: 35vh; /* Set the container height to half the viewport height */
-  background-color: #182524; /* Same color as before */
-  background-size: cover; /* Ensure the background covers the container */
-  background-position: center; /* Center the background */
+  height: 20vh;
+  background-color: #182524;
+  background-size: cover;
+  background-position: center;
   width: 100%;
 }
 
 .propic {
   display: block;
   margin: auto;
-  height: 100%; /* Set the image height to fill the container */
+  height: 100%;
   width: auto;
 }
 
@@ -93,26 +112,33 @@ export default {
 }
 
 .small-carousel {
-  width: 90%; /* Adjust the width of the carousel */
-  margin: auto; /* Center the carousel horizontally */
+  height: 10vh;
+  margin: auto;
 }
 
 .carousel-item {
-  display: flex; /* Use flexbox for vertical centering */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100%; /* Ensure the carousel item takes full height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .carousel-image {
-  max-width: 100%; /* Set the width of carousel images to fit within the container */
-  max-height: 100%; /* Set the height of carousel images to fit within the container */
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s;
+  border-radius: 2%;
+}
+
+.carousel-image:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
 }
 
 .divider {
   width: 50%;
   margin: auto;
-  border-bottom: 2px solid #182524; /* Add a decorative border */
-  margin-bottom: 20px; /* Add some spacing */
+  border-bottom: 2px solid #182524;
+  margin-bottom: 10px;
 }
 </style>

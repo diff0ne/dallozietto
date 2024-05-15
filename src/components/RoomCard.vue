@@ -1,21 +1,24 @@
 <template>
-  <v-card class="room-card" elevation="2">
-    <v-img :src="room.image" aspect-ratio="1.5"></v-img>
-    <v-card-title>{{ room.name }}</v-card-title>
-    <v-card-subtitle>{{ room.location }}</v-card-subtitle>
+  <v-card @click="openDialog" class="room-card" elevation="1">
+    <v-img :src="imageSrc" aspect-ratio="1.5"></v-img>
+    <v-card-title>{{ capitalizeFirstLetter(room.name) }}</v-card-title>
+    <v-card-text>
+      <p>Numero Ospiti: {{ room.maxCapacity }}</p>
+      <p>{{ room.description }}</p>
+    </v-card-text>
     <v-card-actions>
       <!-- Open the dialog on button click -->
       <v-btn text color="primary" @click="openDialog">View Details</v-btn>
     </v-card-actions>
 
     <!-- Dialog component for room details -->
-    <v-dialog v-model="dialog" max-width="500">
+    <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>{{ room.name }}</v-card-title>
+        <v-card-title>{{ capitalizeFirstLetter(room.name) }}</v-card-title>
         <v-card-text>
-          <p>Location: {{ room.location }}</p>
-          <p>Dimension: {{ room.dimension }}</p>
+          <p>{{ room.description }}</p>
           <p>People Allowed: {{ room.maxCapacity }}</p>
+          <p>Dimension: {{ room.dimension }}</p>
           <p>Services: {{ room.services }}</p>
         </v-card-text>
         <v-card-actions>
@@ -38,7 +41,7 @@ export default {
   },
   data() {
     return {
-      dialog: false, // Dialog state
+      dialog: false,
     };
   },
   methods: {
@@ -48,12 +51,11 @@ export default {
     closeDialog() {
       this.dialog = false; // Close the dialog
     },
+    capitalizeFirstLetter(text) {
+      return text.charAt(0).toUpperCase() + text.slice(1);
+    },
   },
 };
 </script>
 
-<style scoped>
-.room-card {
-  margin: 20px;
-}
-</style>
+<style scoped></style>

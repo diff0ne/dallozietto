@@ -15,6 +15,6 @@
   font-family: "Bilbo", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 48px;
+  font-size: 40px;
 }
 </style>
