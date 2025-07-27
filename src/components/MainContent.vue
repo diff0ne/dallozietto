@@ -6,14 +6,17 @@
     <div class="introduction">
       <div class="divider"></div>
       <h2 class="display-2 text-center bilbo-regular">La mia casa - Amabel</h2>
-      <p class="text-center w-auto">
-     Benvenuti a Viganò, nel cuore verde della Brianza.
-<br>
-Appartamento al piano terreno di 160 mq, elegante e rustico, situato sulle colline moreniche dell’Alta Brianza a 400 metri di altezza.
-<br>
-Circondato da un parco privato di 9.000 mq, immerso nella natura del Parco, con accanto un suggestivo bosco di querce, betulle, castagni, ciliegi, acacie e felci.
-<br>
-Una location ideale per lavoro, vacanze o una fuga romantica in Brianza: tra le province di Milano, Monza, Lecco, Como e la vicina Chiasso.
+      <p class="text-center w-auto content">
+        Benvenuti a Viganò, nel cuore verde della Brianza.
+        <br>
+        Appartamento al piano terreno di 160 mq, elegante e rustico, situato sulle colline moreniche dell’Alta Brianza a
+        400 metri di altezza.
+        <br>
+        Circondato da un parco privato di 9.000 mq, immerso nella natura del Parco, con accanto un suggestivo bosco di
+        querce, betulle, castagni, ciliegi e felci.
+        <br>
+        Una location ideale per lavoro, vacanze o una fuga romantica in Brianza: tra le province di Milano, Monza,
+        Lecco, Como e la vicina Chiasso.
 
       </p>
     </div>
@@ -46,11 +49,15 @@ Una location ideale per lavoro, vacanze o una fuga romantica in Brianza: tra le 
 
 <script>
 import RoomCard from "@/components/RoomCard.vue";
+import Services from "@/components/Services.vue";
+import Rules from "@/components/Rules.vue";
 
 export default {
   name: "MainContent",
   components: {
     RoomCard,
+    Services,
+    Rules,
   },
   props: {
     featuredRooms: {
@@ -60,14 +67,7 @@ export default {
   },
   data() {
     return {
-      carouselImages: [
-        "src/assets/overView/image1.jpeg",
-        "src/assets/overView/image2.jpeg",
-        "src/assets/overView/image3.jpeg",
-        "src/assets/overView/image4.jpeg",
-        "src/assets/overView/image5.jpeg",
-        "src/assets/overView/image6.jpeg",
-      ],
+      carouselImages: [],
     };
   },
   methods: {
@@ -76,7 +76,6 @@ export default {
         const image = await import(
           `@/assets/${roomName.toLowerCase()}/main.jpg`
         );
-        console.log("Image path:", image.default);
         return image.default;
       } catch (error) {
         console.error(`Error loading image for room ${roomName}:`, error);
@@ -85,6 +84,14 @@ export default {
     },
   },
   async created() {
+    // Dynamically import overview images
+    const images = import.meta.glob('@/assets/overView/*.{jpg,jpeg,png}', {
+      eager: true,
+      import: 'default',
+    });
+    this.carouselImages = Object.values(images);
+
+    // Dynamically set featured room images
     const updatedRooms = await Promise.all(
       this.featuredRooms.map(async (room) => {
         room.imageSrc = await this.getRoomImageSrc(room.name);
@@ -96,7 +103,10 @@ export default {
 };
 </script>
 
+
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
 .room-center {
   display: flex;
   justify-content: center;
@@ -122,20 +132,21 @@ export default {
 }
 
 .introduction {
-  padding: 20px;
+  padding: 20px 0;
   text-align: center;
 
-  font-family: "Raleway", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #182524;
 
 }
 
 .small-carousel {
   height: 50vh !important;
   margin: auto;
+  width: 60%;
 }
 
 .carousel-item {
@@ -150,11 +161,13 @@ export default {
   max-height: 100%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s;
-  border-radius: 2%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
 }
 
 .carousel-image:hover {
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+   transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
 .divider {
@@ -162,5 +175,11 @@ export default {
   margin: auto;
   border-bottom: 2px solid #182524;
   margin-bottom: 10px;
+}
+
+.featured-rooms {
+  width: 90%;
+  margin: auto;
+  padding-bottom: 38px;
 }
 </style>
