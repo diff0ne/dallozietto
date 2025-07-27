@@ -3,7 +3,7 @@
     <v-img :src="imageSrc" class="padded-image"></v-img>
     <v-card-title>{{ capitalizeFirstLetter(room.name) }}</v-card-title>
     <v-card-text class="subtitle-2">
-      <p>Numero Ospiti: {{ room.maxCapacity }}</p>
+      <p><strong>Numero Ospiti:</strong> {{ room.maxCapacity }}</p>
       <div class="divider"></div>
       <p class="truncate">{{ room.description }}</p>
     </v-card-text>
@@ -11,11 +11,17 @@
       <v-btn text color="primary" @click.stop="openDialog">Vedi Dettagli</v-btn>
     </v-card-actions>
 
-    <v-dialog v-model="dialog" max-width="700">
+    <v-dialog v-model="dialog" max-width="900">
       <v-card>
         <v-card-title>{{ capitalizeFirstLetter(room.name) }}</v-card-title>
 
-        <v-carousel cycle hide-delimiter-background class="dialog-carousel small-carousel">
+        <v-carousel
+          cycle
+          hide-delimiter-background
+          show-arrows
+          class="dialog-carousel"
+          height="350"
+        >
           <v-carousel-item
             v-for="(image, index) in carouselImages"
             :key="index"
@@ -42,7 +48,8 @@
         </v-card-text>
 
         <v-card-text class="dialog-description">
-          <p>{{ room.description }}</p>
+          <h3>Descrizione</h3>
+          <p v-html="formattedDescription"></p>
         </v-card-text>
 
         <v-card-actions>
@@ -72,6 +79,12 @@ export default {
       carouselImages: [],
     };
   },
+  computed: {
+    formattedDescription() {
+      if (!this.room.description) return "";
+      return this.room.description.replace(/\. +/g, '.<br>').replace(/\.$/, '.');
+    },
+  },
   methods: {
     openDialog() {
       this.dialog = true;
@@ -92,7 +105,6 @@ export default {
         .map(([, module]) => module.default);
 
       if (this.carouselImages.length === 0) {
-        // fallback a immagine singola o placeholder se non ci sono immagini
         this.carouselImages = [this.imageSrc];
       }
     },
@@ -104,7 +116,6 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 .room-card {
-  margin: 32px;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   font-size: 1rem;
@@ -113,7 +124,9 @@ export default {
 }
 
 .padded-image {
-  padding: 8px;
+  margin: 16px;
+  padding: 2px;
+  border-radius: 4px;
 }
 
 .divider {
@@ -131,43 +144,71 @@ export default {
 }
 
 .dialog-carousel {
-  height: 200px;
-}
-
-.dialog-characteristics {
-  padding-top: 20px;
-}
-
-.characteristic {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
-.characteristic-label {
-  font-weight: bold;
-}
-
-.small-carousel {
-  height: 100px;
+  max-width: 780px;
+  margin: auto;
+  position: relative;
 }
 
 .carousel-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80%;
+  height: 100%;
 }
 
 .carousel-image {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 85%;
+  max-height: 330px;
+  height: auto;
+  object-fit: contain;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 6px;
 }
 
 .carousel-image:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.v-carousel__controls__item {
+  color: #182524 !important;
+  font-size: 28px !important;
+  opacity: 0.9 !important;
+  transition: opacity 0.3s ease;
+}
+
+.v-carousel__controls__item:hover {
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+.characteristic-label {
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.dialog-characteristics {
+  padding: 0px 16px !important;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.characteristic {
+  margin-bottom: 6px;
+}
+
+.dialog-description {
+  padding: 0px 16px !important;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #182524;
+  margin-top: 0;
+}
+
+.dialog-description h3 {
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 </style>

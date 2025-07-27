@@ -122,6 +122,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 
 .room-center {
+  padding: 16px;
   display: flex;
   justify-content: center;
 }
@@ -160,7 +161,7 @@ export default {
 .small-carousel {
   height: 50vh !important;
   margin: auto;
-  width: 60%;
+  width: 50%;
 }
 
 .carousel-item {
@@ -175,8 +176,9 @@ export default {
   max-height: 100%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 2px;
+  border-radius: 4px;
 }
 
 .carousel-image:hover {
