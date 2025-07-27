@@ -17,7 +17,6 @@
         <br>
         Una location ideale per lavoro, vacanze o una fuga romantica in Brianza: tra le province di Milano, Monza,
         Lecco, Como e la vicina Chiasso.
-
       </p>
     </div>
     <v-carousel cycle hide-delimiter-background class="small-carousel">
@@ -54,11 +53,7 @@ import Rules from "@/components/Rules.vue";
 
 export default {
   name: "MainContent",
-  components: {
-    RoomCard,
-    Services,
-    Rules,
-  },
+  components: { RoomCard, Services, Rules },
   props: {
     featuredRooms: {
       type: Array,
@@ -71,11 +66,10 @@ export default {
     };
   },
   methods: {
+    // Dynamically import main image for each room
     async getRoomImageSrc(roomName) {
       try {
-        const image = await import(
-          `@/assets/${roomName.toLowerCase()}/main.jpg`
-        );
+        const image = await import(`@/assets/${roomName.toLowerCase()}/main.jpg`);
         return image.default;
       } catch (error) {
         console.error(`Error loading image for room ${roomName}:`, error);
@@ -84,39 +78,37 @@ export default {
     },
   },
   async created() {
-  // Load all overview images
-  const images = import.meta.glob('@/assets/overView/*.{jpg,jpeg,png}', {
-    eager: true,
-    import: 'default',
-  });
+    // Import all overview images eagerly
+    const images = import.meta.glob('@/assets/overView/*.{jpg,jpeg,png}', {
+      eager: true,
+      import: 'default',
+    });
 
-  // Sort so 'esterno...' comes first
-  const sortedKeys = Object.keys(images).sort((a, b) => {
-    // Push filenames that start with 'esterno' to the beginning
-    const aName = a.toLowerCase();
-    const bName = b.toLowerCase();
-    const aIsEsterno = aName.includes('esterno');
-    const bIsEsterno = bName.includes('esterno');
+    // Sort images to prioritize those starting with 'esterno'
+    const sortedKeys = Object.keys(images).sort((a, b) => {
+      const aName = a.toLowerCase();
+      const bName = b.toLowerCase();
+      const aIsEsterno = aName.includes('esterno');
+      const bIsEsterno = bName.includes('esterno');
 
-    if (aIsEsterno && !bIsEsterno) return -1;
-    if (!aIsEsterno && bIsEsterno) return 1;
-    return aName.localeCompare(bName); 
-  });
+      if (aIsEsterno && !bIsEsterno) return -1;
+      if (!aIsEsterno && bIsEsterno) return 1;
+      return aName.localeCompare(bName);
+    });
 
-  this.carouselImages = sortedKeys.map((key) => images[key]);
+    this.carouselImages = sortedKeys.map((key) => images[key]);
 
-  const updatedRooms = await Promise.all(
-    this.featuredRooms.map(async (room) => {
-      room.imageSrc = await this.getRoomImageSrc(room.name);
-      return room;
-    })
-  );
-  this.featuredRooms = updatedRooms;
-}
-
+    // Attach image sources to featured rooms
+    const updatedRooms = await Promise.all(
+      this.featuredRooms.map(async (room) => {
+        room.imageSrc = await this.getRoomImageSrc(room.name);
+        return room;
+      })
+    );
+    this.featuredRooms = updatedRooms;
+  }
 };
 </script>
-
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
@@ -149,13 +141,11 @@ export default {
 .introduction {
   padding: 20px 0;
   text-align: center;
-
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   font-size: 1rem;
   line-height: 1.6;
   color: #182524;
-
 }
 
 .small-carousel {
@@ -175,14 +165,13 @@ export default {
   max-width: 100%;
   max-height: 100%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.3s;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.3s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 2px;
   border-radius: 4px;
 }
 
 .carousel-image:hover {
-   transform: scale(1.1);
+  transform: scale(1.1);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 

@@ -1,13 +1,12 @@
 <template>
   <v-footer app class="footer">
     <div class="footer-content">
-      <!-- Left side: copyright -->
+      <!-- Left: Copyright text -->
       <span class="copyright">&copy; {{ new Date().getFullYear() }} Villa Amabel. Tutti i diritti riservati.</span>
 
-      <!-- Right side: contact info + location -->
+      <!-- Right: Contact info and location -->
       <div class="contact-wrapper">
         <div class="contact-info">
-          <!-- Email -->
           <v-icon
             class="contact-icon"
             @click="openEmail"
@@ -19,7 +18,6 @@
 
           <span class="spacer"></span>
 
-          <!-- Phone -->
           <v-icon
             class="contact-icon"
             @click="openPhone"
@@ -28,7 +26,6 @@
           <a href="tel:+393337326617" class="contact-link phone-text">+39 333 732 6617</a>
         </div>
 
-        <!-- Location -->
         <div class="location" @click="openNavigator" title="Indirizzo">
           <v-icon class="contact-icon">mdi-map-marker</v-icon>
           <span class="location-text">Viganò, Via della Bandagera 8, Lecco</span>
@@ -42,14 +39,17 @@
 export default {
   name: "Footer",
   methods: {
+    // Opens Google Maps with the address destination
     openNavigator() {
       const address = encodeURIComponent("Viganò, Via della Bandagera 8, Lecco");
       const url = `https://www.google.com/maps/dir/?api=1&destination=${address}`;
       window.open(url, "_blank");
     },
+    // Opens default email client
     openEmail() {
       window.location.href = "mailto:avv.gabrieledifede@libero.it";
     },
+    // Initiates phone call
     openPhone() {
       window.location.href = "tel:+393337326617";
     },
@@ -70,7 +70,7 @@ export default {
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Left and right aligned */
   align-items: center;
   gap: 40px;
   white-space: nowrap;
@@ -117,7 +117,6 @@ export default {
   font-weight: 500;
 }
 
-
 .contact-link:hover {
   text-decoration: underline;
 }
@@ -128,6 +127,7 @@ export default {
   font-size: 18px;
 }
 
+/* Responsive: hide contact info on smaller screens, keep only copyright */
 @media (max-width: 1024px) {
   .contact-wrapper {
     display: none;
