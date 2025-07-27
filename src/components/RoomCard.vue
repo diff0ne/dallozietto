@@ -1,66 +1,52 @@
 <template>
-  <!-- Room Card Component -->
   <v-card @click="openDialog" class="room-card" elevation="1">
-    <!-- Room Image -->
-    <v-img :src="imageSrc"></v-img>
-    <!-- Room Title -->
+    <v-img :src="imageSrc" class="padded-image"></v-img>
     <v-card-title>{{ capitalizeFirstLetter(room.name) }}</v-card-title>
-    <!-- Room Details -->
     <v-card-text class="subtitle-2">
       <p>Numero Ospiti: {{ room.maxCapacity }}</p>
       <div class="divider"></div>
       <p class="truncate">{{ room.description }}</p>
     </v-card-text>
-    <!-- Button to Open Dialog -->
     <v-card-actions>
-      <v-btn text color="primary" @click="openDialog">Vedi Dettagli</v-btn>
+      <v-btn text color="primary" @click.stop="openDialog">Vedi Dettagli</v-btn>
     </v-card-actions>
 
-    <!-- Dialog Component for Room Details -->
     <v-dialog v-model="dialog" max-width="700">
       <v-card>
-        <!-- Dialog Title -->
         <v-card-title>{{ capitalizeFirstLetter(room.name) }}</v-card-title>
 
-        <!-- Carousel of Room Pictures -->
-        <v-carousel
-          cycle
-          hide-delimiter-background
-          class="dialog-carousel small-carousel"
-        >
-          <!-- Loop through Carousel Images -->
-          <v-carousel-item v-for="(image, index) in carouselImages" :key="index">
+        <v-carousel cycle hide-delimiter-background class="dialog-carousel small-carousel">
+          <v-carousel-item
+            v-for="(image, index) in carouselImages"
+            :key="index"
+          >
             <div class="carousel-item">
-              <!-- Image within Carousel -->
-              <img :src="image" class="carousel-image" />
+              <img :src="image" class="carousel-image padded-image" />
             </div>
           </v-carousel-item>
         </v-carousel>
 
-        <!-- Room Characteristics -->
         <v-card-text class="dialog-characteristics">
           <div class="characteristic">
-            <span class="characteristic-label">People Allowed:</span>
+            <span class="characteristic-label">Numero Ospiti:</span>
             <span>{{ room.maxCapacity }}</span>
           </div>
           <div class="characteristic">
-            <span class="characteristic-label">Dimension:</span>
+            <span class="characteristic-label">Dimensione:</span>
             <span>{{ room.dimension }}</span>
           </div>
           <div class="characteristic">
-            <span class="characteristic-label">Services:</span>
+            <span class="characteristic-label">Servizi:</span>
             <span>{{ room.services.join(", ") }}</span>
           </div>
         </v-card-text>
 
-        <!-- Room Description -->
         <v-card-text class="dialog-description">
           <p>{{ room.description }}</p>
         </v-card-text>
 
-        <!-- Dialog Actions -->
         <v-card-actions>
-          <v-btn text @click="closeDialog">Close</v-btn>
+          <v-btn text @click="closeDialog">Chiudi</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -71,50 +57,65 @@
 export default {
   name: "RoomCard",
   props: {
-    // Room Object Prop
     room: {
       type: Object,
       required: true,
     },
-    // Image Source Prop
     imageSrc: {
       type: String,
-      required: true,
-    },
-    // Carousel Images Prop
-    carouselImages: {
-      type: Array,
       required: true,
     },
   },
   data() {
     return {
-      // Dialog State
       dialog: false,
+      carouselImages: [],
     };
   },
   methods: {
-    // Method to Open Dialog
     openDialog() {
       this.dialog = true;
+      this.loadImages(this.room.name);
     },
-    // Method to Close Dialog
     closeDialog() {
       this.dialog = false;
     },
-    // Method to Capitalize First Letter of a String
     capitalizeFirstLetter(text) {
+      if (!text) return "";
       return text.charAt(0).toUpperCase() + text.slice(1);
+    },
+    loadImages(roomName) {
+      const images = import.meta.glob("/src/assets/*/*.{jpg,jpeg,png}", { eager: true });
+
+      this.carouselImages = Object.entries(images)
+        .filter(([path]) => path.toLowerCase().includes(`/assets/${roomName.toLowerCase()}/`))
+        .map(([, module]) => module.default);
+
+      if (this.carouselImages.length === 0) {
+        // fallback a immagine singola o placeholder se non ci sono immagini
+        this.carouselImages = [this.imageSrc];
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-/* Component Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 .room-card {
   margin: 32px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #182524;
 }
+
+.padded-image {
+  padding: 8px;
+}
+
 .divider {
   height: 1px;
   width: 100%;
@@ -128,6 +129,7 @@ export default {
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+
 .dialog-carousel {
   height: 200px;
 }
@@ -148,5 +150,24 @@ export default {
 
 .small-carousel {
   height: 100px;
+}
+
+.carousel-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
+
+.carousel-image {
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 </style>

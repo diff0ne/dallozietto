@@ -19,48 +19,43 @@ export default {
   },
   data() {
     return {
-      featuredRooms: [
+      "featuredRooms": [
         {
-          name: "iris",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur, justo eu sollicitudin sodales, risus libero porta nisi, id vehicula neque libero at elit.",
-          dimension: "400 sqft",
-          maxCapacity: 2,
-          services: ["Free Wi-Fi", "Air Conditioning", "Room Service"],
+          "name": "iris",
+          "description": "Camera matrimoniale accogliente e luminosa, con ampio letto in legno, lenzuola fresche e vista sul verde dal grande finestrone con grate di sicurezza. Dispone di armadio, scrivania, scarpiera e TV. Ideale per rilassarsi dopo una giornata di visite. Ambiente silenzioso e curato nei dettagli.",
+          "dimension": "20 sqm",
+          "maxCapacity": 2,
+          "services": ["TV", "Scrivania"]
         },
         {
-          name: "rosa",
-          description:
-            "Sed et purus in purus accumsan placerat. Proin nec congue risus. Donec eget odio ullamcorper, facilisis mi nec, tempor enim.",
-          dimension: "600 sqft",
-          maxCapacity: 4,
-          services: ["Free Parking", "Kitchenette", "Balcony"],
+          "name": "rosa",
+          "description": "Camera doppia luminosa con due letti singoli in legno, ciascuno dotato di set di asciugamani e biancheria. La finestra con vista sul verde garantisce luce naturale e tranquillità. Completano l’arredo un armadio spazioso e un mobile con specchio, perfetti per soggiorni confortevoli.",
+          "dimension": "20 sqm",
+          "maxCapacity": 2,
+          "services": ["Armadio", "Specchio"]
         },
         {
-          name: "aquilegia",
-          description:
-            "Sed et purus in purus accumsan placerat. Proin nec congue risus. Donec eget odio ullamcorper, facilisis mi nec, tempor enim.",
-          dimension: "600 sqft",
-          maxCapacity: 4,
-          services: ["Free Parking", "Kitchenette", "Balcony"],
+          "name": "aquilegia",
+          "description": "Elegante camera matrimoniale in stile classico, con arredi in legno massiccio e atmosfera calda e rilassante. Dotata di bagno privato con ampia doccia idromassaggio, bidet, grande armadio, scrivania e piccola TV. Ideale per chi cerca comfort e privacy in un ambiente raffinato.",
+          "dimension": "25 sqm",
+          "maxCapacity": 2,
+          "services": ["Bagno privato", "Doccia idromassaggio", "TV", "Scrivania"]
         },
         {
-          name: "ortensia",
-          location: "San Francisco",
-          description:
-            "Sed et purus in purus accumsan placerat. Proin nec congue risus. Donec eget odio ullamcorper, facilisis mi nec, tempor enim.",
-          dimension: "600 sqft",
-          maxCapacity: 4,
-          services: ["Free Parking", "Kitchenette", "Balcony"],
-        },
-      ],
-    };
+          "name": "ortensia",
+          "description": "Camera doppia spaziosa e luminosa, arredata con due letti singoli in legno, ideale per amici o colleghi. Dispone di ampio armadio e scrivania comoda, con spazio extra per bagagli o attività di lavoro/studio. Ambiente semplice e funzionale, perfetto per un soggiorno pratico e confortevole.",
+          "dimension": "20 sqm",
+          "maxCapacity": 2,
+          "services": ["Scrivania", "Armadio", "Spazio extra per bagagli"]
+        }
+      ]
+    }
+
   },
 };
 </script>
 
 <style scoped>
-/* Adjust the width of the main content */
 .main-content {
   width: 90%;
   margin: auto;

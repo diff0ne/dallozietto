@@ -6,7 +6,7 @@
     <div class="introduction">
       <div class="divider"></div>
       <h2 class="display-2 text-center bilbo-regular">La mia casa - Amabel</h2>
-      <p class="text-center w-auto content">
+      <p class="text-center w-auto ">
         Benvenuti a Viganò, nel cuore verde della Brianza.
         <br>
         Appartamento al piano terreno di 160 mq, elegante e rustico, situato sulle colline moreniche dell’Alta Brianza a
@@ -84,22 +84,36 @@ export default {
     },
   },
   async created() {
-    // Dynamically import overview images
-    const images = import.meta.glob('@/assets/overView/*.{jpg,jpeg,png}', {
-      eager: true,
-      import: 'default',
-    });
-    this.carouselImages = Object.values(images);
+  // Load all overview images
+  const images = import.meta.glob('@/assets/overView/*.{jpg,jpeg,png}', {
+    eager: true,
+    import: 'default',
+  });
 
-    // Dynamically set featured room images
-    const updatedRooms = await Promise.all(
-      this.featuredRooms.map(async (room) => {
-        room.imageSrc = await this.getRoomImageSrc(room.name);
-        return room;
-      })
-    );
-    this.featuredRooms = updatedRooms;
-  },
+  // Sort so 'esterno...' comes first
+  const sortedKeys = Object.keys(images).sort((a, b) => {
+    // Push filenames that start with 'esterno' to the beginning
+    const aName = a.toLowerCase();
+    const bName = b.toLowerCase();
+    const aIsEsterno = aName.includes('esterno');
+    const bIsEsterno = bName.includes('esterno');
+
+    if (aIsEsterno && !bIsEsterno) return -1;
+    if (!aIsEsterno && bIsEsterno) return 1;
+    return aName.localeCompare(bName); 
+  });
+
+  this.carouselImages = sortedKeys.map((key) => images[key]);
+
+  const updatedRooms = await Promise.all(
+    this.featuredRooms.map(async (room) => {
+      room.imageSrc = await this.getRoomImageSrc(room.name);
+      return room;
+    })
+  );
+  this.featuredRooms = updatedRooms;
+}
+
 };
 </script>
 
