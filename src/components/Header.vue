@@ -2,16 +2,17 @@
     <div>
       <v-app-bar
         app
-        color="#E2F1E6"
+        color="#E6E5D1"
         :style="{ transform: headerTransform, zIndex: headerZIndex, marginTop: headerMarginTop, marginLeft: headerMarginLeft, marginRight: headerMarginRight }"
         class="sticky-header"
         :rounded="rounded"
         :elevation="elevation"
       >
         <v-toolbar-title class="font-title headline" @click="scrollTop">
-          Benvenuto da Amabel!
+          Benvenuto da Amabel
         </v-toolbar-title>
         <v-spacer></v-spacer>
+        Informazioni:
         <v-btn icon @click="makePhoneCall">
           <v-icon>mdi-phone</v-icon>
         </v-btn>
@@ -21,9 +22,7 @@
         <v-btn icon @click="openGoogleMaps">
           <v-icon>mdi-map-marker</v-icon>
         </v-btn>
-        <v-btn icon @click="switchLanguage">
-          <v-icon>mdi-translate</v-icon>
-        </v-btn>
+
       </v-app-bar>
     </div>
   </template>
@@ -110,9 +109,9 @@
   }
   
   .font-title {
-    font-family: "Bilbo", cursive;
+    font-family: "Bilbo";
     font-weight: 400;
-    font-size: 45px; /* Increased font size */
+    font-size: 80px; /* Increased font size */
     cursor: pointer; /* Change cursor to pointer on hover */
   }
   

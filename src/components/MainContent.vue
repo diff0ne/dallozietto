@@ -1,18 +1,20 @@
 <template>
   <div class="main-content">
     <div class="propic-container">
-      <img class="propic" src="@/assets/propic.png" alt="Propic" />
+      <img class="propic" src="@/assets/propic.jpg" alt="Propic" />
     </div>
     <div class="introduction">
       <div class="divider"></div>
       <h2 class="display-2 text-center bilbo-regular">La mia casa - Amabel</h2>
       <p class="text-center w-auto">
-        Benvenuti nella mia villa nel verde! Mi chiamano lo
-        <span style="font-style: italic; color: green">Zietto</span> e sono un
-        appassionato della natura e della campagna. <br />
-        Qui, tra gli alberi e il canto degli uccelli, ho creato un rifugio
-        accogliente per chi cerca pace e tranquillità. <br />
-        Siate i benvenuti a condividere con me questo angolo di paradiso.
+     Benvenuti a Viganò, nel cuore verde della Brianza.
+<br>
+Appartamento al piano terreno di 160 mq, elegante e rustico, situato sulle colline moreniche dell’Alta Brianza a 400 metri di altezza.
+<br>
+Circondato da un parco privato di 9.000 mq, immerso nella natura del Parco, con accanto un suggestivo bosco di querce, betulle, castagni, ciliegi, acacie e felci.
+<br>
+Una location ideale per lavoro, vacanze o una fuga romantica in Brianza: tra le province di Milano, Monza, Lecco, Como e la vicina Chiasso.
+
       </p>
     </div>
     <v-carousel cycle hide-delimiter-background class="small-carousel">
@@ -27,14 +29,7 @@
     <div class="featured-rooms">
       <v-container fluid>
         <v-row>
-          <v-col
-            v-for="(room, index) in featuredRooms"
-            :key="index"
-            cols="12"
-            sm="6"
-            md="6"
-            class="room-center"
-          >
+          <v-col v-for="(room, index) in featuredRooms" :key="index" cols="12" sm="6" md="6" class="room-center">
             <RoomCard :room="room" :imageSrc="room.imageSrc" />
           </v-col>
         </v-row>
@@ -110,33 +105,46 @@ export default {
 .main-content {
   position: relative;
 }
+
 .propic-container {
-  height: 18vh;
-  background-color: #182524;
+  height: 20vh;
+  background-color: #E6E5D1;
   background-size: cover;
   background-position: center;
   width: 100%;
 }
+
 .propic {
   display: block;
   margin: auto;
   height: 100%;
   width: auto;
 }
+
 .introduction {
   padding: 20px;
   text-align: center;
+
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+
 }
+
 .small-carousel {
-  height: 55vh !important;
+  height: 50vh !important;
   margin: auto;
 }
+
 .carousel-item {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
+
 .carousel-image {
   max-width: 100%;
   max-height: 100%;
@@ -144,9 +152,11 @@ export default {
   transition: box-shadow 0.3s;
   border-radius: 2%;
 }
+
 .carousel-image:hover {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
 }
+
 .divider {
   width: 50%;
   margin: auto;

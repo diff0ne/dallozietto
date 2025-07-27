@@ -1,7 +1,7 @@
 <template>
     <v-footer app class="footer">
       <div class="footer-content">
-        <span class="copyright">&copy; {{ new Date().getFullYear() }} Dallo Zietto. All rights reserved.</span>
+        <span class="copyright">&copy; {{ new Date().getFullYear() }} Villa Amabel. All rights reserved.</span>
         <span class="contact-info">Contact us: <a href="mailto:info@dallozietto.com" class="contact-link">info@dallozietto.com</a> | +123456789</span>
       </div>
     </v-footer>
@@ -15,7 +15,7 @@
   
   <style scoped>
   .footer {
-    background-color: #E2F1E6;
+    background-color: #E6E5D1;
     font-family: "Arial", sans-serif;
     position: fixed;
     bottom: 0;

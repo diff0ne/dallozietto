@@ -62,7 +62,7 @@ export default {
 <style scoped>
 /* Adjust the width of the main content */
 .main-content {
-  width: 80%;
+  width: 90%;
   margin: auto;
   padding-bottom: 38px;
 }
@@ -70,7 +70,7 @@ export default {
 /* Media query for large screens */
 @media screen and (min-width: 1200px) {
   .main-content {
-    width: 60%;
+    width: 80%;
   }
 }
 </style>
